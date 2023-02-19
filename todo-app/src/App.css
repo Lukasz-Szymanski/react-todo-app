@@ -1,0 +1,25 @@
+body {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main {
+  margin-top: 10rem;
+  width: 80vw;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+input {
+  width: 25rem;
+  margin-right: 10px;
+}
+
+ul button {
+  margin: 0 10px 5px 20px;
+}
