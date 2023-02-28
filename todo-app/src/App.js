@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import "./App.css";
 
+
+
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [categoryValue, setCategoryValue] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState("");
 
+  const categories = ["Praca", "Dom", "Hobby"];
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTasks([...tasks, { title: inputValue, completed: false, id: Date.now() }]);
+    setTasks([...tasks,
+      {
+        title: inputValue,
+        completed: false,
+        id: Date.now(),
+        category: categoryValue,
+      },
+    ]);
     setInputValue("");
+    setCategoryValue("");
   };
 
   const handleEdit = (index, e) => {
@@ -35,7 +50,19 @@ function App() {
           placeholder="Wpisz zadanie"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          required
         />
+        <select 
+          value={categoryValue}
+          onChange={(e) => setCategoryValue(e.target.value)}
+        >
+          <option value="">Wybierz kategorię</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
         <button type="submit">Dodaj zadanie</button>
       </form>
 
@@ -44,6 +71,7 @@ function App() {
           <li key={task.id} id={`task-${task.id}`}>
             <div>
               {task.completed ? <del>{task.title}</del> : task.title}
+              <span>({task.category})</span>
               <button
                 onClick={() =>
                   setTasks(
